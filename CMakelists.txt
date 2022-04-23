@@ -1,0 +1,51 @@
+#cmake -S . -B .\build -G "Visual Studio 17 2022" -A Win32 -D CMAKE_PREFIX_PATH="C:\Qt\_32DLL\lib\cmake"
+cmake_minimum_required(VERSION 3.22)
+project(path VERSION 0.0.0 LANGUAGES CXX)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+if(WIN32)
+  set(CMAKE_WIN32_EXECUTABLE ON)
+endif()
+
+find_package(Qt5 COMPONENTS
+        Core
+        Widgets
+    REQUIRED QUIET
+)
+
+add_executable(path
+Connection.cpp
+Connection.hpp
+ConnectionGeometry.cpp
+ConnectionGeometry.hpp
+ConnectionGraphicsObject.cpp
+ConnectionGraphicsObject.hpp
+ConnectionPainter.cpp
+ConnectionPainter.hpp
+EndType.hpp
+FlowGraphicsView.cpp
+FlowGraphicsView.hpp
+FlowItemEntry.cpp
+FlowItemEntry.hpp
+FlowItemInterface.cpp
+FlowItemInterface.hpp
+FlowScene.cpp
+FlowScene.hpp
+main.cpp
+Node.cpp
+Node.hpp
+
+)
+
+target_include_directories(path PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+
+target_link_libraries(path
+    PRIVATE
+        Qt5::Widgets
+        Qt5::Gui
+)
